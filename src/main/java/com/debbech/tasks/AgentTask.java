@@ -1,8 +1,8 @@
 package com.debbech.tasks;
 
-import com.debbech.tasks.hackernews.exceptions.EndLoopException;
+import java.util.List;
 
 public interface AgentTask {
-    String behaveOnAiResponse(String aiResponse) throws EndLoopException;
     String initialPrompt() throws Exception;
+    List<Object> tools();
 }
