@@ -1,4 +1,4 @@
-package com.debbech.store;
+package com.debbech.agenticbot.store;
 
 public enum Actor {
     SYSTEM,

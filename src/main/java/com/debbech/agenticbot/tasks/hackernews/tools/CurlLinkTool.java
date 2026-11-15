@@ -1,4 +1,4 @@
-package com.debbech.tasks.hackernews.tools;
+package com.debbech.agenticbot.tasks.hackernews.tools;
 
 import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;

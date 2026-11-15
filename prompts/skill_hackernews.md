@@ -37,7 +37,7 @@ Note: if the result is `PASS`, the page could not be fetched; ignore it and keep
 Upon receiving it:
 - Read and analyze the response.
 - Determine the article's actual subject.
-- Evaluate its relevance to user taste.
+- Evaluate its relevance to user taste and give it to score on how much you are confident enough to recommend it on 10.
 - Accept or reject the article.
 - Continue investigating other candidates when necessary.
 - Keep in mind that the text you received is the whole scraped webpage text only not the full html
@@ -49,10 +49,10 @@ After evaluating all articles, return only the relevant recommendations.
 
 Format:
 
-1. **Article Title**
+1. **Article Title** **Score**
    Article URL
 
-2. **Article Title**
+2. **Article Title** **Score**
    Article URL
 
 Rules:

@@ -1,7 +1,7 @@
-package com.debbech.tasks.hackernews;
+package com.debbech.agenticbot.tasks.hackernews;
 
-import com.debbech.tasks.AgentTask;
-import com.debbech.tasks.hackernews.tools.CurlLinkTool;
+import com.debbech.agenticbot.tasks.AgentTask;
+import com.debbech.agenticbot.tasks.hackernews.tools.CurlLinkTool;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

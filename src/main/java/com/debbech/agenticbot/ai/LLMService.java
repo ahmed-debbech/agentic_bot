@@ -1,8 +1,9 @@
-package com.debbech.ai;
+package com.debbech.agenticbot.ai;
 
-import com.debbech.store.Actor;
-import com.debbech.store.ConversationStore;
-import com.debbech.tasks.AgentTask;
+import com.debbech.agenticbot.notification.NotificationService;
+import com.debbech.agenticbot.store.Actor;
+import com.debbech.agenticbot.store.ConversationStore;
+import com.debbech.agenticbot.tasks.AgentTask;
 import dev.langchain4j.agent.tool.ToolExecutionRequest;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.service.AiServices;
@@ -26,6 +27,9 @@ public class LLMService {
 
     @Autowired
     private ConversationStore conversationStore;
+    
+    @Autowired(required = false)
+    private NotificationService notificationService;
 
     public void executeAgentLoop(AgentTask agentTask) {
 
@@ -72,6 +76,23 @@ public class LLMService {
 
         log.info("ASSISTANT is writing---");
         conversationStore.appendMessage(convId, Actor.ASSISTANT, result.content());
+        
+        // Send results through notification service if configured
+        if (notificationService != null) {
+            // For now, we'll send an empty list to trigger the "nothing recommended" message
+            // In a real implementation, we would extract articles from the result
+            notificationService.sendRecommendedArticles(java.util.Collections.emptyList())
+                    .thenAccept(sent -> {
+                        if (sent) {
+                            log.info("Successfully sent notification");
+                        } else {
+                            log.warn("Failed to send notification");
+                        }
+                    });
+        } else {
+            log.info("Notification service not configured. Skipping notification.");
+        }
+        
         log.info("DONE---");
     }
 }

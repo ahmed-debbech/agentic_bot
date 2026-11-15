@@ -1,4 +1,4 @@
-package com.debbech.ai;
+package com.debbech.agenticbot.ai;
 
 
 import jakarta.annotation.PostConstruct;

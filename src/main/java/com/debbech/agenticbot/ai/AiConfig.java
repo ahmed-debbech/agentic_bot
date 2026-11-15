@@ -1,4 +1,4 @@
-package com.debbech.ai;
+package com.debbech.agenticbot.ai;
 
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;

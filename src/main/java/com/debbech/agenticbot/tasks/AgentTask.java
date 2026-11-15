@@ -1,4 +1,4 @@
-package com.debbech.tasks;
+package com.debbech.agenticbot.tasks;
 
 import java.util.List;
 

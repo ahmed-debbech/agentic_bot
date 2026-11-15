@@ -1,5 +1,7 @@
 services:
   agentic:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
