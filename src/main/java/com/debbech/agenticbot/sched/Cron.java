@@ -1,6 +1,7 @@
 package com.debbech.agenticbot.sched;
 
 import com.debbech.agenticbot.ai.LLMService;
+import com.debbech.agenticbot.notification.NotificationService;
 import com.debbech.agenticbot.tasks.hackernews.HackerNewsTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -15,6 +16,9 @@ public class Cron {
 
     @Autowired
     private LLMService llmService;
+    
+    @Autowired(required = false)
+    private NotificationService notificationService;
 
     private final AtomicBoolean running = new AtomicBoolean(false);
 
@@ -33,7 +37,17 @@ public class Cron {
             return; // Already running, skip this execution
         }
         try {
-            llmService.executeAgentLoop(new HackerNewsTask());
+            String aiResponse = llmService.executeAgentLoop(new HackerNewsTask());
+            if (notificationService != null) {
+                notificationService.sendMessage(aiResponse)
+                    .thenAccept(sent -> {
+                        if (sent) {
+                            System.out.println("Successfully sent notification");
+                        } else {
+                            System.out.println("Failed to send notification");
+                        }
+                    });
+            }
         } finally {
             running.set(false);
         }

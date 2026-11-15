@@ -5,7 +5,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,31 +20,15 @@ public class TelegramNotificationService implements NotificationService {
 
     @Value("${telegram.chat.token}")
     private String botToken;
-    @Value("${telegram.chat.id")
+    @Value("${telegram.chat.id}")
     private String chatId;
 
-    private HttpClient httpClient;
+    private HttpClient httpClient = HttpClient.newBuilder().build();
 
     
     @Override
-    public CompletableFuture<Boolean> sendRecommendedArticles(List<Article> articles) {
-        if (articles.isEmpty()) {
-            // Send a message indicating no articles were recommended
-            return sendMessage("Recommended HN posts: \nNothing is recommended");
-        }
-        
-        StringBuilder messageBuilder = new StringBuilder("Recommended HN posts: \n");
-        for (int i = 0; i < articles.size(); i++) {
-            Article article = articles.get(i);
-            messageBuilder.append(i + 1).append(". ").append(article.getTitle())
-                    .append("\n   Link: ").append(article.getUrl());
-            if (article.getSummary() != null && !article.getSummary().isEmpty()) {
-                messageBuilder.append("\n   Summary: ").append(article.getSummary());
-            }
-            messageBuilder.append("\n\n");
-        }
-        
-        return sendMessage(messageBuilder.toString().trim());
+    public CompletableFuture<Boolean> sendMessage(String message) {
+        return sendRawMessage(message);
     }
     
     /**
@@ -54,7 +37,7 @@ public class TelegramNotificationService implements NotificationService {
      * @param message The message to send
      * @return CompletableFuture indicating success or failure
      */
-    public CompletableFuture<Boolean> sendMessage(String message) {
+    private CompletableFuture<Boolean> sendRawMessage(String message) {
         try {
             String encodedMessage = java.net.URLEncoder.encode(message, StandardCharsets.UTF_8);
             String url = String.format("https://api.telegram.org/bot%s/sendMessage", botToken);

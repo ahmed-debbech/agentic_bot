@@ -67,6 +67,7 @@ Rules:
 - Avoid duplicates.
 - Prefer quality over quantity.
 - If no relevant articles exist, say so.
+- Always recommend exactly 3
 
 ## Completion
 The task is complete when all candidate articles have been evaluated and the final recommendations are ready or non exist.
