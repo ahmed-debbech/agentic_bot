@@ -9,7 +9,13 @@ The user provides a JSON array of Hacker News articles containing titles, URLs, 
 Inspect all articles and prioritize relevance over popularity.
 
 ### User Taste
-The user's primary technical interest is programming in general, writeups on technical stories like hacking or discoveries and cves. Also interest in ai harnesses and agentic flow. Also about decentralized systems and protocol creation like Nostr and activity pub and how a message can travel from one machine to another. ALso interest in networking concepts. Also interests in self hosting and homelabing.
+The user’s main interest is programming, with a focus on:
+
+* Security: technical writeups on hacking, discoveries, and CVEs.
+* AI: agent harnesses and agentic flows.
+* Decentralized systems: protocol design (Nostr, ActivityPub) and how a message travels from one machine to another.
+* Networking: core concepts and how they work in practice.
+* Self-hosting: homelabs and running personal infrastructure.
 
 
 Use this fixed interest when evaluating technical content. No reading history or preference discovery is required.

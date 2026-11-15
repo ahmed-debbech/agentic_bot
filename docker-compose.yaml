@@ -14,4 +14,4 @@ services:
     volumes:
       - ./conv:/conv
       - ./prompts:/prompts
-      - ./src/main/resources/application.properties:/app/src/main/resources/application.properties
+      - ./application.properties:/app/src/main/resources/application.properties
